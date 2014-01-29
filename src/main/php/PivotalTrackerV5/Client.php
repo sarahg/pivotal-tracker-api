@@ -54,23 +54,17 @@ class Client
      * object.
      *
      * @param array $story
+     * @param string $name
+     * @param string $description
      * @return object
      */
-    public function addStory( $story  )
+    public function addStory( array $story  )
     {
-        /*
-        
-          $story = array(
-                            'story_type' => $type,
-                            'name' => $name,
-                            'description' => $description
-                        );
-         */
-
+      
         return json_decode(
             $this->client->post(
                 "/projects/{$this->project}/stories",
-                json_encode( $story  )
+                json_encode( $story )
             )
         );
     }
@@ -88,11 +82,8 @@ class Client
         return simplexml_load_string(
             $this->client->post(
                 "/projects/{$this->project}/stories/$storyId/tasks",
-                http_build_query(
-                    array(
-                        'task' => array( 'description' => $description )
-                    )
-                )
+                json_encode( array( 'description' => $description ) )
+                
             )
         );
     }
@@ -110,10 +101,8 @@ class Client
         return json_decode(
             $this->client->put(
                 "/projects/{$this->project}/stories/$storyId",
-                http_build_query(
-                    array(
-                        'story' => array( 'labels' => join( ',', $labels ) )
-                    )
+                json_encode(  $labels )
+                    
                 )
             )
         );
