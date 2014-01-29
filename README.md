@@ -19,11 +19,11 @@ To Add a Story:
 $story =  array(
 		'name' => 'A Brand New Story',
 		'story_type' => 'feature',
-		'description' => 'A small description'
+		'description' => 'A small description',
 		'labels' => array(  
 		    array( 
-		      'name' => 'test'  
-		      ) 
+		    	'name' => 'test'  
+		    ) 
 		 )
 ); 
 $result = $pivotalTracker->addStory( $story )  ;
