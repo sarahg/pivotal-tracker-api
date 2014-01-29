@@ -35,7 +35,11 @@ class Client
      * @var \PivotalTracker\Rest\Client
      */
     private $client;
-
+    /**
+     * 
+     * @param string $apiKey  API Token provided by PivotalTracking
+     * @param string $project Project ID
+     */
     public function __construct( $apiKey, $project )
     {
         $this->client = new Rest\Client( self::API_URL );
