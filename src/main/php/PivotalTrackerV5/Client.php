@@ -54,8 +54,6 @@ class Client
      * object.
      *
      * @param array $story
-     * @param string $name
-     * @param string $description
      * @return object
      */
     public function addStory( $story  )
@@ -72,11 +70,7 @@ class Client
         return json_decode(
             $this->client->post(
                 "/projects/{$this->project}/stories",
-                http_build_query(
-                    array(
-                        'story'  =>  $story  
-                    )
-                )
+                json_encode( $story  )
             )
         );
     }
