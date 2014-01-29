@@ -1,5 +1,5 @@
 {
-    "name":         "DrZippie/pivotal-tracker-api",
+    "name":         "drzippie/pivotal-tracker-api",
     "description":  "Library that provides a PHP interface to interact with the PivotalTracker API V5",
     "homepage":     "https://github.com/DrZppie/pivotal-tracker-api",
     "keywords":     ["pivotaltracker", "api", "v5"],
