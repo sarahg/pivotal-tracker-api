@@ -53,23 +53,28 @@ class Client
      * Adds a new story to PivotalTracker and returns the newly created story
      * object.
      *
-     * @param string $type
+     * @param array $story
      * @param string $name
      * @param string $description
      * @return object
      */
-    public function addStory( $type, $name, $description )
+    public function addStory( $story  )
     {
+        /*
+        
+          $story = array(
+                            'story_type' => $type,
+                            'name' => $name,
+                            'description' => $description
+                        );
+         */
+
         return json_decode(
             $this->client->post(
                 "/projects/{$this->project}/stories",
                 http_build_query(
                     array(
-                        'story'  =>  array(
-                            'story_type' => $type,
-                            'name' => $name,
-                            'description' => $description
-                        )
+                        'story'  =>  $story  
                     )
                 )
             )
