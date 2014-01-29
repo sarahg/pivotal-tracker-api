@@ -43,7 +43,7 @@ class Client
     public function __construct( $apiKey, $project )
     {
         $this->client = new Rest\Client( self::API_URL );
-        $this->client->addHeader( 'Content-type', 'application/x-www-form-urlencoded' );
+        $this->client->addHeader( 'Content-type', 'application/json' );
         $this->client->addHeader( 'X-TrackerToken',  $apiKey );
         $this->project = $project;
     }
