@@ -7,7 +7,7 @@
  * @license LGPL v3 license <http://www.gnu.org/licenses/lgpl>
  */
 
-namespace PivotalTracker\Rest;
+namespace PivotalTrackerV5\Rest;
 
 /**
  * Helper class that provides some basic REST functionality.
