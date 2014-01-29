@@ -9,7 +9,7 @@ Example:
 ```php
 $pivotalTracker =  new \PivotalTrackerV5\Client(  $apiToken , $projectId ) ;
 
-$storyList = $pivotalTracker->getStories( 'label:mylabel')  ;
+$storyList = $pivotalTracker->getStories( 'label:test')  ;
 ```
 
 To Add a Story:
