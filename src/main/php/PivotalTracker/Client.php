@@ -7,7 +7,7 @@
  * @license LGPL v3 license <http://www.gnu.org/licenses/lgpl>
  */
 
-namespace PivotalTracker;
+namespace PivotalTrackerV5;
 
 /**
  * Simple Pivotal Tracker api client.

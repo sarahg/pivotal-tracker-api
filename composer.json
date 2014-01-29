@@ -24,7 +24,7 @@
 
     "autoload": {
         "psr-0": {
-            "PivotalTracker": "src/main/php/"
+            "PivotalTrackerV5": "src/main/php/"
         }
     }
 }
