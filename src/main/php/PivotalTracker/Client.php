@@ -20,7 +20,7 @@ class Client
     /**
      * Base url for the PivotalTracker service api.
      */
-    const API_URL = 'https://www.pivotaltracker.com/services/v3';
+    const API_URL = 'https://www.pivotaltracker.com/services/v5';
 
     /**
      * Name of the context project.
@@ -36,26 +36,15 @@ class Client
      */
     private $client;
 
-    public function __construct( $project )
+    public function __construct( $apiKey, $project )
     {
         $this->client = new Rest\Client( self::API_URL );
         $this->client->addHeader( 'Content-type', 'application/x-www-form-urlencoded' );
-
+        $this->client->addHeader( 'X-TrackerToken',  $apiKey );
         $this->project = $project;
     }
 
-    /**
-     * Authenticates this client against PivotalTracker.
-     *
-     * @param string $username
-     * @param string $password
-     * @return void
-     */
-    public function authenticate( $username, $password )
-    {
-        $this->client->addHeader( 'X-TrackerToken', $this->getToken( $username, $password ) );
-    }
-
+ 
     /**
      * Adds a new story to PivotalTracker and returns the newly created story
      * object.
@@ -63,11 +52,11 @@ class Client
      * @param string $type
      * @param string $name
      * @param string $description
-     * @return \SimpleXMLElement
+     * @return object
      */
     public function addStory( $type, $name, $description )
     {
-        return simplexml_load_string(
+        return json_decode(
             $this->client->post(
                 "/projects/{$this->project}/stories",
                 http_build_query(
@@ -111,11 +100,11 @@ class Client
      *
      * @param integer $storyId
      * @param array $labels
-     * @return \SimpleXMLElement
+     * @return object
      */
     public function addLabels( $storyId, array $labels )
     {
-        return simplexml_load_string(
+        return json_decode(
             $this->client->put(
                 "/projects/{$this->project}/stories/$storyId",
                 http_build_query(
@@ -136,7 +125,7 @@ class Client
      */
     public function getStories( $filter = null )
     {
-        return simplexml_load_string(
+        return json_decode(
             $this->client->get(
                 "/projects/{$this->project}/stories",
                 $filter ? array( 'filter' => $filter ) : null
@@ -147,11 +136,11 @@ class Client
     /**
      * Returns a list of projects for the currently authenticated user.
      *
-     * @return \SimpleXMLElement
+     * @return object
      */
     public function getProjects()
     {
-        return simplexml_load_string(
+        return json_decode(
             $this->client->get(
                 "/projects"
             )
@@ -159,23 +148,5 @@ class Client
 
     }
 
-    /**
-     * Returns the authentication token for the given username and password.
-     *
-     * @param string $username
-     * @param string $password
-     * @return string
-     */
-    public function getToken( $username, $password )
-    {
-        return (string) simplexml_load_string( $this->client->post(
-            '/tokens/active',
-            http_build_query(
-                array(
-                    'username' => $username,
-                    'password' => $password
-                )
-            )
-        ) )->guid;
-    }
+     
 }
