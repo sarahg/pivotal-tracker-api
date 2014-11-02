@@ -102,11 +102,8 @@ class Client
             $this->client->put(
                 "/projects/{$this->project}/stories/$storyId",
                 json_encode(  $labels )
-                    
-                )
             )
         );
-
     }
 
     /**
