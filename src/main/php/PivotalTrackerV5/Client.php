@@ -36,7 +36,7 @@ class Client
      */
     private $client;
     /**
-     * 
+     *
      * @param string $apiKey  API Token provided by PivotalTracking
      * @param string $project Project ID
      */
@@ -48,7 +48,7 @@ class Client
         $this->project = $project;
     }
 
- 
+
     /**
      * Adds a new story to PivotalTracker and returns the newly created story
      * object.
@@ -60,12 +60,29 @@ class Client
      */
     public function addStory( array $story  )
     {
-      
+
         return json_decode(
             $this->client->post(
                 "/projects/{$this->project}/stories",
                 json_encode( $story )
             )
+        );
+    }
+
+
+    /**
+     * Deletes a story from PivotalTracker.
+     *
+     * @param integer $storyIdn
+     * @return array
+     */
+    public function deleteStory( $storyId )
+    {
+
+        return json_decode(
+          $this->client->delete(
+            "/projects/{$this->project}/stories/$storyId"
+          )
         );
     }
 
@@ -83,7 +100,7 @@ class Client
             $this->client->post(
                 "/projects/{$this->project}/stories/$storyId/tasks",
                 json_encode( array( 'description' => $description ) )
-                
+
             )
         );
     }
@@ -137,5 +154,5 @@ class Client
 
     }
 
-     
+
 }

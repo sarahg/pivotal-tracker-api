@@ -32,7 +32,8 @@ class Client
      */
     const GET  = 'GET',
           POST = 'POST',
-          PUT  = 'PUT';
+          PUT  = 'PUT',
+          DELETE = 'DELETE';
 
     /**
      * Optional default headers for each request.
@@ -100,6 +101,25 @@ class Client
             $path .= '?' . http_build_query( $query );
         }
         return $this->request( self::GET, $path, $body );
+    }
+
+    /**
+     * Execute a HTTP DELETE request to the remote server
+     *
+     * Returns the raw response from the remote server.
+     *
+     * @param string $path
+     * @param array $query
+     * @param mixed $body
+     * @return mixed
+     */
+    public function delete( $path, array $query = null, $body = null )
+    {
+        if ( $query )
+        {
+            $path .= '?' . http_build_query( $query );
+        }
+        return $this->request( self::DELETE, $path, $body );
     }
 
     /**
