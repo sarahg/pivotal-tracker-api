@@ -124,6 +124,24 @@ class Client
     }
 
     /**
+     * Replaces the Description field on a story
+     * and returns the updated story instance.
+     *
+     * @param integer $storyId
+     * @param string $description
+     * @return object
+     */
+    public function replaceStoryDescription( $storyId, $description )
+    {
+        return json_decode(
+          $this->client->put(
+            "/projects/{$this->project}/stories/$storyId",
+            json_encode(  array( 'description' => $description ) )
+          )
+        );
+    }
+
+    /**
      * Returns all stories for the context project.
      *
      * @param array $filter
